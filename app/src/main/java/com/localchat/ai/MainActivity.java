@@ -570,6 +570,13 @@ public class MainActivity extends Activity {
     private GradientDrawable round(int color, int radius) { GradientDrawable drawable = new GradientDrawable(); drawable.setColor(color); drawable.setCornerRadius(dp(radius)); return drawable; }
     private LinearLayout.LayoutParams lp(int width, int height) { return new LinearLayout.LayoutParams(width, height); }
     private LinearLayout.LayoutParams lp(int width, int height, float weight) { return new LinearLayout.LayoutParams(width, height, weight); }
+    private <T extends View> T margins(T view, int left, int top, int right, int bottom) {
+        LinearLayout.LayoutParams params = view.getLayoutParams() instanceof LinearLayout.LayoutParams
+                ? (LinearLayout.LayoutParams) view.getLayoutParams() : lp(-1, -2);
+        params.setMargins(dp(left), dp(top), dp(right), dp(bottom));
+        view.setLayoutParams(params);
+        return view;
+    }
     private LinearLayout.LayoutParams margins(LinearLayout.LayoutParams params, int left, int top, int right, int bottom) { params.setMargins(dp(left), dp(top), dp(right), dp(bottom)); return params; }
     private int dp(int value) { return (int) (value * getResources().getDisplayMetrics().density + .5f); }
     private void hideKeyboard(View view) { ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0); }
